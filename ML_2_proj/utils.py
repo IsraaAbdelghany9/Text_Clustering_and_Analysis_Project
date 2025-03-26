@@ -6,8 +6,9 @@ from nltk.tokenize import TweetTokenizer
 from nltk.stem.wordnet import WordNetLemmatizer
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-
-
+from sklearn.manifold import TSNE 
+import numpy as np 
+from sklearn import metrics
 
 def process_tweet(tweet):
     """Process tweet function.
@@ -74,3 +75,25 @@ def plot_elbow_and_silhouette(X, k_range=range(2, 10)):
     plt.title('Silhouette Analysis')
 
     plt.show()
+
+
+def tsne_cluster_visualization(X, model):
+    clusters = model.labels_.tolist()
+
+    # Reduce dimensions using t-SNE
+    tsne = TSNE(n_components=2, random_state=42, perplexity=30)
+    X_embedded = tsne.fit_transform(X.toarray())
+
+    # Plot t-SNE clusters
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X_embedded[:, 0], X_embedded[:, 1], c=clusters, cmap='tab10', alpha=0.6)
+    plt.colorbar(label='Cluster')
+    plt.title("t-SNE Visualization of KMeans Clusters")
+    plt.show()
+
+
+def purity_score(y_true, y_pred):
+    # compute contingency matrix (also called confusion matrix)
+    contingency_matrix = metrics.cluster.contingency_matrix(y_true, y_pred)
+
+    return np.sum(np.amax(contingency_matrix, axis=0)) / np.sum(contingency_matrix)
