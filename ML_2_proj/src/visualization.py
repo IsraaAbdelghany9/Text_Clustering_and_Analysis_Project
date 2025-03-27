@@ -5,6 +5,9 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import matplotlib
 matplotlib.use('TkAgg')  # Use TkAgg backend for interactive plots
+import sys
+sys.setrecursionlimit(2000) 
+
 
 def plot_elbow_and_silhouette(X, k_range=range(2, 10)):
     """
@@ -68,7 +71,7 @@ def tsne_cluster_visualization(X, model):
 
 
 
-def hierarchical_clustering_dendrogram(X):
+def hierarchical_clustering_dendrogram(X, linkage_matrix):
     """
     Plots a hierarchical clustering dendrogram.
     
@@ -76,10 +79,9 @@ def hierarchical_clustering_dendrogram(X):
         X (scipy.sparse.csr.csr_matrix): Data.  
     
     """
-    linkage_matrix = linkage(X.toarray(), 'ward')
 
     plt.figure(figsize=(15, 7))
-    dendrogram(linkage_matrix, leaf_rotation=90, leaf_font_size=10, color_threshold=0.7 * max(linkage_matrix[:, 2]), p=12, show_contracted=False)
+    dendrogram(linkage_matrix, leaf_rotation=90, leaf_font_size=10, color_threshold=0.7 * max(linkage_matrix[:, 2]), p=5, show_contracted=False)
     plt.title("Hierarchical Clustering Dendrogram")
     plt.xlabel("Sample Index")
     plt.ylabel("Distance")

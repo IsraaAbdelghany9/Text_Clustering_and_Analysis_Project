@@ -38,6 +38,9 @@ X, vectorizer = vectorize_text(cleaned_docs, ngram_range=(3,3))
 # Apply clustering
 model = apply_kmeans(X, n_clusters=K)
 
+# Compute linkage
+linkage_matrix = compute_linkage(X, method='ward')
+
 # Evaluate clustering
 silhouette = compute_silhouette(X, model.labels_)
 print(f"Silhouette Score: {silhouette}")
@@ -45,6 +48,6 @@ purity_score = purity_score(News_df.target, model.labels_)
 print(f"Purity Score: {purity_score}")
 
 # Visualize clusters
-plot_elbow_and_silhouette(X)
-tsne_cluster_visualization(X, model)
-hierarchical_clustering_dendrogram(X)
+# plot_elbow_and_silhouette(X)
+# tsne_cluster_visualization(X, model)
+hierarchical_clustering_dendrogram(X, linkage_matrix)
