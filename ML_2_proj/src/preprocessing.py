@@ -4,29 +4,38 @@ from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
 from nltk.stem.wordnet import WordNetLemmatizer
 
-def process_tweet(tweet):
-    """
-    Cleans and tokenizes a tweet.
-    
-    Args:
-        tweet (str): A tweet.
 
-    Returns:
-        list: A list of cleaned and tokenized words.
-    
+def process_tweet(tweet):
+    """Process tweet function.
+    Input:
+        tweet: a string containing a tweet
+    Output:
+        tweets_clean: a list of words containing the processed tweet
+
     """
+    if not isinstance(tweet, str):
+        raise ValueError(f"Expected a string, but got {type(tweet)}")
+
     lemmatizer = WordNetLemmatizer()
     stopwords_english = stopwords.words('english')
 
-    tweet = re.sub(r'\$\w*', '', tweet)  # Remove stock tickers
-    tweet = re.sub(r'^RT[\s]+', '', tweet)  # Remove RT
-    tweet = re.sub(r'https?://[^\s\n\r]+', '', tweet)  # Remove links
-    tweet = re.sub(r'#', '', tweet)  # Remove hashtags
-    tweet = re.sub(r'\d+', '', tweet)  # Remove numbers
+    # remove stock market tickers like $GE
+    tweet = re.sub(r'\$\w*', '', tweet)
+    # remove old style retweet text "RT"
+    tweet = re.sub(r'^RT[\s]+', '', tweet)
+    # remove hyperlinks    
+    tweet = re.sub(r'https?://[^\s\n\r]+', '', tweet)
+    # remove hashtags only removing the hash # sign 
+    tweet = re.sub(r'#', '', tweet)
+    # remove numbers
+    tweet = re.sub(r'\d+', '', tweet)
 
-    tokenizer = TweetTokenizer(preserve_case=False, strip_handles=True, reduce_len=True)
+
+    # tokenize tweets
+    tokenizer = TweetTokenizer(preserve_case=False, strip_handles=True,reduce_len=True)
     tweet_tokens = tokenizer.tokenize(tweet)
 
+    # Clean tokens: remove stopwords and punctuation, then lemmatize
     tweets_clean = [
         lemmatizer.lemmatize(word)
         for word in tweet_tokens
@@ -34,3 +43,4 @@ def process_tweet(tweet):
     ]
 
     return tweets_clean
+
