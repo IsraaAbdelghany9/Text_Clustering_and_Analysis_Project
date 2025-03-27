@@ -3,7 +3,8 @@ from sklearn.manifold import TSNE
 from scipy.cluster.hierarchy import linkage, dendrogram
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
-
+import matplotlib
+matplotlib.use('TkAgg')  # Use TkAgg backend for interactive plots
 
 def plot_elbow_and_silhouette(X, k_range=range(2, 10)):
     """
@@ -21,8 +22,11 @@ def plot_elbow_and_silhouette(X, k_range=range(2, 10)):
         model = KMeans(n_clusters=k, init='k-means++', max_iter=100, n_init=10, random_state=42)
         model.fit(X)
         inertia.append(model.inertia_)
-        silhouette_scores.append(silhouette_score(X, model.labels_))
+        if k > 1:  # Silhouette score is undefined for k=1
+            score = silhouette_score(X, model.labels_)
+            silhouette_scores.append(score)
 
+    # Plot Elbow Method        
     plt.figure(figsize=(10, 5))
     plt.subplot(1, 2, 1)
     plt.plot(k_range, inertia, marker='o', linestyle='-')
@@ -30,12 +34,14 @@ def plot_elbow_and_silhouette(X, k_range=range(2, 10)):
     plt.ylabel('Inertia')
     plt.title('Elbow Method')
 
+    # Plot Silhouette Scores
     plt.subplot(1, 2, 2)
     plt.plot(k_range, silhouette_scores, marker='o', linestyle='-')
     plt.xlabel('Number of Clusters (k)')
     plt.ylabel('Silhouette Score')
     plt.title('Silhouette Analysis')
 
+    plt.tight_layout()
     plt.show()
 
 
