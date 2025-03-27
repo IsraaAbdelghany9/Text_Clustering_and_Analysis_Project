@@ -9,6 +9,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.manifold import TSNE 
 import numpy as np 
 from sklearn import metrics
+from scipy.cluster.hierarchy import linkage, dendrogram
 
 def process_tweet(tweet):
     """Process tweet function.
@@ -97,3 +98,23 @@ def purity_score(y_true, y_pred):
     contingency_matrix = metrics.cluster.contingency_matrix(y_true, y_pred)
 
     return np.sum(np.amax(contingency_matrix, axis=0)) / np.sum(contingency_matrix)
+
+
+def hierarchical_clustering_dendrogram(X):
+    # Assuming 'tweets_transformed' is the TF-IDF matrix
+    linkage_matrix = linkage(X.toarray(), 'ward')
+
+# Plot the dendrogram
+    plt.figure(figsize=(15, 7))
+    dendrogram(
+    linkage_matrix,
+    leaf_rotation=90,  # Rotate labels for better readability
+    leaf_font_size=10,  # Adjust font size for labels
+    color_threshold=0.7 * max(linkage_matrix[:, 2]),  # Set color threshold
+    p=12,  # Show only the last p merged clusters
+    show_contracted=False,  # Compact the dendrogram
+)
+    plt.title("Hierarchical Clustering Dendrogram")
+    plt.xlabel("Sample Index")
+    plt.ylabel("Distance")
+    plt.show()
