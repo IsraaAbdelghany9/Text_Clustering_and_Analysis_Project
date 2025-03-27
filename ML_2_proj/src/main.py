@@ -45,6 +45,6 @@ purity_score = purity_score(News_df.target, model.labels_)
 print(f"Purity Score: {purity_score}")
 
 # Visualize clusters
-# plot_elbow_and_silhouette(X)
-# tsne_cluster_visualization(X, model)
-# hierarchical_clustering_dendrogram(X)
+plot_elbow_and_silhouette(X)
+tsne_cluster_visualization(X, model)
+hierarchical_clustering_dendrogram(X)
