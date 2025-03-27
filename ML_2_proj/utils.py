@@ -101,10 +101,8 @@ def purity_score(y_true, y_pred):
 
 
 def hierarchical_clustering_dendrogram(X):
-    # Assuming 'tweets_transformed' is the TF-IDF matrix
     linkage_matrix = linkage(X.toarray(), 'ward')
 
-# Plot the dendrogram
     plt.figure(figsize=(15, 7))
     dendrogram(
     linkage_matrix,
@@ -113,7 +111,8 @@ def hierarchical_clustering_dendrogram(X):
     color_threshold=0.7 * max(linkage_matrix[:, 2]),  # Set color threshold
     p=12,  # Show only the last p merged clusters
     show_contracted=False,  # Compact the dendrogram
-)
+    )
+
     plt.title("Hierarchical Clustering Dendrogram")
     plt.xlabel("Sample Index")
     plt.ylabel("Distance")
