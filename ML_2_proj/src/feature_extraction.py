@@ -13,5 +13,5 @@ def vectorize_text(text_data, ngram_range=(1,1)):
         TfidfVectorizer: A TfidfVectorizer object.
     
     """
-    vectorizer = TfidfVectorizer(ngram_range=ngram_range)
+    vectorizer = TfidfVectorizer(ngram_range=ngram_range , stop_words='english', max_features=5000)
     return vectorizer.fit_transform(text_data), vectorizer
