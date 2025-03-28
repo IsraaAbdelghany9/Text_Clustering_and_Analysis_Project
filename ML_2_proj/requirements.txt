@@ -4,3 +4,7 @@ pandas
 scikit-learn
 nltk
 scipy
+uvicorn
+fastapi
+
+
