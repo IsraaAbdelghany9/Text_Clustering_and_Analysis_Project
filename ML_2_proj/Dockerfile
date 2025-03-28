@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -11,7 +11,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project into the container
-COPY . /app/ML_2_proj
+COPY . .
+
+# Ensure the model file exists
+COPY results/ /app/results
 
 # Expose the port that FastAPI will run on
 EXPOSE 8000
