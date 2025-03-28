@@ -31,4 +31,4 @@ def compute_linkage(X, method='ward'):
         numpy.ndarray: Linkage matrix.
     
     """
-    return linkage(X.toarray(), method)
+    return linkage(X.toarray(), method=method)
