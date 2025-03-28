@@ -5,8 +5,6 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import matplotlib
 matplotlib.use('TkAgg')  # Use TkAgg backend for interactive plots
-import sys
-sys.setrecursionlimit(2000) 
 
 
 def plot_elbow_and_silhouette(X, k_range=range(2, 10)):
