@@ -20,31 +20,34 @@ This project is a comprehensive text clustering and analysis pipeline that proce
 ## Project Structure
 
 ```
-ML_2_proj/
-├── src/
-│   ├── main.py                # Main script for clustering and evaluation
-│   ├── preprocessing.py       # Text preprocessing functions
-│   ├── feature_extraction.py  # TF-IDF vectorization
-│   ├── clustering.py          # Clustering algorithms
-│   ├── evaluation.py          # Evaluation metrics
-│   ├── visualization.py       # Visualization functions
-│   ├── server.py              # FastAPI server for API
-├── notebooks/
-│   ├── EDA.ipynb              # Exploratory Data Analysis
-│   ├── FULL_PROJECT_NOTEBOOK.ipynb # Full project workflow
-│   ├── READING_DATA.ipynb     # Reading and exploring datasets
-├── results/                   # Directory for saving models and results
-│   ├── kmeans_model.joblib    # Saved K-Means model
-│   ├── vectorizer.joblib      # Saved TF-IDF vectorizer
-│   ├── labels.joblib          # Cluster labels
-│   ├── linkage_matrix.joblib  # Linkage matrix for hierarchical clustering
-│   ├── silhouette.joblib      # Silhouette score
-│   ├── purity_score.joblib    # Purity score
-├── requirements.txt           # Python dependencies
-├── Dockerfile                 # Docker configuration
-├── README.md                  # Project documentation
+Text_Clustering_and_Analysis_Project
+├── Full_project_in1Notebook
+│   ├── Full_Project_Notebook.ipynb                   # Full project workflow
+│   └── utils.py                                      # Functions implementation
+├── Full_Structured_project
+│   ├── Dockerfile                                    # Docker configuration
+│   ├── notebooks
+│   │   └── EDA.ipynb                                 # Exploratory Data Analysis
+│   ├── requirements.txt                              # Python dependencies
+│   ├── results                                       # Directory for saving models and results
+│   │   ├── kmeans_model.joblib
+│   │   ├── labels.joblib
+│   │   ├── linkage_matrix.joblib
+│   │   ├── purity_score.joblib
+│   │   ├── silhouette.joblib
+│   │   └── vectorizer.joblib
+│   └── src
+│       ├── clustering.py                            # Clustering algorithms
+│       ├── evaluation.py                            # Evaluation metrics
+│       ├── feature_extraction.py                    # TF-IDF vectorization
+│       ├── main.py                                  # Main script for clustering and evaluation
+│       ├── preprocessing.py                         # Text preprocessing functions
+│       ├── server.py                                # FastAPI server for API
+│       ├── test.py
+│       └── visualization.py                         # Visualization functions
+├── LICENSE                                          # Project License
+└── README.md                                        # Project documentation
 ```
-
 ---
 
 ## Requirements
